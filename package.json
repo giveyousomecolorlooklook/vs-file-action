@@ -20,6 +20,10 @@
       {
         "command": "vs-file-action.showFileActions",
         "title": "Show File Actions"
+      },
+      {
+        "command": "vs-file-action.showStatusBarMenu",
+        "title": "Show Status Bar Menu"
       }
     ],
     "menus": {
