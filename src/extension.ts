@@ -55,6 +55,7 @@ registry.register('npm-script', {
 });
 
 export function activate(context: vscode.ExtensionContext) {
+	vscode.window.showInformationMessage('Congratulations, your extension "vs-file-action" is now active!');
   let disposable = vscode.commands.registerCommand('vs-file-action.showFileActions', async (uri: vscode.Uri) => {
     try {
       // 读取 actions.json 配置文件
