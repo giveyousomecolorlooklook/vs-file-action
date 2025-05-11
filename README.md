@@ -1,71 +1,76 @@
-# vs-file-action README
+ 
+# VS File Action
 
-This is the README for your extension "vs-file-action". After writing up a brief description, we recommend including the following sections.
+一个用于自定义文件操作的 VS Code 扩展，支持通过右键菜单和状态栏快速执行预定义的文件操作。
 
-## Features
+## 功能特点
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- 右键菜单集成
+  - 在文件上右键可快速执行预定义操作
+  - 根据文件类型显示不同的操作选项
 
-For example if there is an image subfolder under your extension project workspace:
+- 状态栏快捷访问
+  - 点击状态栏图标快速访问功能
+  - 支持编辑配置和执行操作
 
-\!\[feature X\]\(images/feature-x.png\)
+- 支持多种操作类型
+  - VS Code 命令
+  - Shell 命令
+  - NPM 脚本
+  - 可扩展的自定义处理器
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## 使用方法
 
-## Requirements
+1. **通过右键菜单**
+   - 在文件上右键
+   - 选择 "Show File Actions"
+   - 从可用操作列表中选择
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+2. **通过状态栏**
+   - 点击状态栏的 "File Actions" 图标
+   - 选择：
+     - 编辑配置文件
+     - 对当前文件执行操作
 
-## Extension Settings
+## 配置说明
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+在 `actions.json` 中配置文件操作：
 
-For example:
+```json
+{
+  "fileActions": [
+    {
+      "fileType": ".js",
+      "actions": [
+        {
+          "name": "格式化代码",
+          "type": "vscode-command",
+          "config": {
+            "command": "editor.action.formatDocument"
+          }
+        }
+      ]
+    }
+  ]
+}
+```
 
-This extension contributes the following settings:
+## 系统要求
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- Visual Studio Code ^1.98.2
 
-## Known Issues
+## 安装
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+1. 通过 VS Code 扩展市场安装
+2. 重启 VS Code
+3. 根据需要配置 `actions.json`
 
-## Release Notes
+## 许可证
 
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+MIT
 
 ---
 
-## Following extension guidelines
+**开始使用 VS File Action 提升您的开发效率！**
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+        
