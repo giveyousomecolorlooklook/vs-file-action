@@ -1,0 +1,74 @@
+{
+  "fileActions": [
+    {
+      "fileType": ".js",
+      "actions": [
+        {
+          "name": "格式化代码",
+          "type": "vscode-command",
+          "config": {
+            "command": "editor.action.formatDocument"
+          }
+        },
+        {
+          "name": "运行文件",
+          "type": "shell-command",
+          "config": {
+            "command": "node ${filePath}",
+            "cwd": "${fileDir}"
+          }
+        },
+        {
+          "name": "使用 Prettier 格式化",
+          "type": "npm-script",
+          "config": {
+            "script": "prettier --write ${filePath}"
+          }
+        }
+      ]
+    },
+    {
+      "fileType": ".ts",
+      "actions": [
+        {
+          "name": "编译",
+          "type": "shell-command",
+          "config": {
+            "command": "tsc ${filePath}",
+            "cwd": "${fileDir}"
+          }
+        },
+        {
+          "name": "运行 ts-node",
+          "type": "shell-command",
+          "config": {
+            "command": "ts-node ${filePath}",
+            "cwd": "${fileDir}"
+          }
+        }
+      ]
+    },
+    {
+      "fileType": ".md",
+      "actions": [
+        {
+          "name": "预览",
+          "type": "vscode-command",
+          "config": {
+            "command": "markdown.showPreview"
+          }
+        },
+        {
+          "name": "自定义操作",
+          "type": "custom",
+          "config": {
+            "handler": "markdownHandler",
+            "params": {
+              "operation": "customTransform"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
