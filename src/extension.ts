@@ -32,10 +32,20 @@ registry.register('vscode-command', {
 
 registry.register('shell-command', {
   async execute(uri: vscode.Uri, config: { command: string, cwd?: string }) {
-    const terminal = vscode.window.createTerminal('File Action');
     const command = config.command
       .replace('${filePath}', uri.fsPath)
       .replace('${fileDir}', path.dirname(uri.fsPath));
+    
+    // 查找已存在的终端
+    let terminal = vscode.window.terminals.find(t => t.name === 'shell-command');
+    
+    // 如果找到了终端，检查它是否在运行命令
+    if (terminal) {
+      // 没有好的办法，以后补充。
+    } else {
+      // 如果没有找到终端，创建新的
+      terminal = vscode.window.createTerminal('shell-command');
+    }
     
     terminal.sendText(command);
     terminal.show();
@@ -44,7 +54,13 @@ registry.register('shell-command', {
 
 registry.register('npm-script', {
   async execute(uri: vscode.Uri, config: { script: string }) {
-    const terminal = vscode.window.createTerminal('NPM Script');
+    // 查找已存在的NPM Script终端
+    let terminal = vscode.window.terminals.find(t => t.name === 'NPM Script');
+    
+    // 如果没有找到就创建新的终端
+    if (!terminal) {
+      terminal = vscode.window.createTerminal('NPM Script');
+    }
     const command = config.script
       .replace('${filePath}', uri.fsPath)
       .replace('${fileDir}', path.dirname(uri.fsPath));

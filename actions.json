@@ -1,6 +1,19 @@
 {
   "fileActions": [
     {
+      "fileType": ".csv",
+      "actions": [
+        {
+          "name": "使用Excel打开",
+          "type": "shell-command",
+          "config": {
+            "command": "start excel \"${filePath}\"",
+            "cwd": "${fileDir}"
+          }
+        }
+      ]
+    },
+    {
       "fileType": ".js",
       "actions": [
         {
