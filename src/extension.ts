@@ -79,46 +79,19 @@ export function activate(context: vscode.ExtensionContext) {
     100
   );
   statusBarItem.text = "$(gear) File Actions";
-  statusBarItem.tooltip = "管理文件操作";
+  statusBarItem.tooltip = "Settings for File Actions";
   statusBarItem.command = 'vs-file-action.showStatusBarMenu';
   statusBarItem.show();
   
   // 注册状态栏菜单命令
   let statusBarCommand = vscode.commands.registerCommand('vs-file-action.showStatusBarMenu', async () => {
-    const selection = await vscode.window.showQuickPick(
-      [
-        {
-          label: "$(edit) 编辑配置文件",
-          description: "修改 actions.json 配置文件",
-          value: "edit"
-        },
-        {
-          label: "$(play) 执行文件操作",
-          description: "对当前文件执行操作",
-          value: "execute"
-        }
-      ],
-      {
-        placeHolder: "选择操作"
-      }
-    );
-
-    if (selection) {
-      if (selection.value === "edit") {
-        const configPath = path.join(context.extensionPath, 'actions.json');
-        const doc = await vscode.workspace.openTextDocument(configPath);
-        await vscode.window.showTextDocument(doc);
-      } else if (selection.value === "execute") {
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-          vscode.commands.executeCommand('vs-file-action.showFileActions', editor.document.uri);
-        } else {
-          vscode.window.showWarningMessage('请先打开一个文件');
-        }
-      }
-    }
+    const configPath = path.join(context.extensionPath, 'actions.json');
+    const doc = await vscode.workspace.openTextDocument(configPath);
+    await vscode.window.showTextDocument(doc);
   });
-	
+
+
+	// 注册命令，用于显示文件操作
   let disposable = vscode.commands.registerCommand('vs-file-action.showFileActions', async (uri: vscode.Uri) => {
     try {
       // 读取 actions.json 配置文件

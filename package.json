@@ -36,6 +36,12 @@
           "command": "vs-file-action.showFileActions",
           "group": "navigation"
         }
+      ],
+      "editor/title": [
+        {          
+          "command": "vs-file-action.showFileActions",
+          "group": "navigation"
+        }
       ]
     }
   },
