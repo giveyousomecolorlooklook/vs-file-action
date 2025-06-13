@@ -23,7 +23,9 @@
     "commands": [
       {
         "command": "vs-file-action.showFileActions",
-        "title": "Show File Actions"
+        "title": "fileActions",
+        "icon": "$(gear)"
+
       },
       {
         "command": "vs-file-action.showStatusBarMenu",
