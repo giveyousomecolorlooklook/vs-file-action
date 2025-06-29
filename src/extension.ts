@@ -31,22 +31,19 @@ registry.register('vscode-command', {
 });
 
 registry.register('shell-command', {
-  async execute(uri: vscode.Uri, config: { command: string, cwd?: string }) {
+  async execute(uri: vscode.Uri, config: { command: string }) {
+    const extensionPath = vscode.extensions.getExtension('chentp0601.vs-file-action')?.extensionPath || '';
+    const fileName = path.basename(uri.fsPath);
     const command = config.command
       .replace('${filePath}', uri.fsPath)
-      .replace('${fileDir}', path.dirname(uri.fsPath));
-    
-    // 查找已存在的终端
+      .replace('${fileDir}', path.dirname(uri.fsPath))
+      .replace('${fileName}', fileName)
+      .replace('${extensionPath}', extensionPath);
+
     let terminal = vscode.window.terminals.find(t => t.name === 'shell-command');
-    
-    // 如果找到了终端，检查它是否在运行命令
-    if (terminal) {
-      // 没有好的办法，以后补充。
-    } else {
-      // 如果没有找到终端，创建新的
+    if (!terminal) {
       terminal = vscode.window.createTerminal('shell-command');
     }
-    
     terminal.sendText(command);
     terminal.show();
   }
@@ -54,17 +51,18 @@ registry.register('shell-command', {
 
 registry.register('npm-script', {
   async execute(uri: vscode.Uri, config: { script: string }) {
-    // 查找已存在的NPM Script终端
+    const extensionPath = vscode.extensions.getExtension('chentp0601.vs-file-action')?.extensionPath || '';
+    const fileName = path.basename(uri.fsPath);
+    const command = config.script
+      .replace('${filePath}', uri.fsPath)
+      .replace('${fileDir}', path.dirname(uri.fsPath))
+      .replace('${fileName}', fileName)
+      .replace('${extensionPath}', extensionPath);
+
     let terminal = vscode.window.terminals.find(t => t.name === 'NPM Script');
-    
-    // 如果没有找到就创建新的终端
     if (!terminal) {
       terminal = vscode.window.createTerminal('NPM Script');
     }
-    const command = config.script
-      .replace('${filePath}', uri.fsPath)
-      .replace('${fileDir}', path.dirname(uri.fsPath));
-    
     terminal.sendText(`npm run ${command}`);
     terminal.show();
   }

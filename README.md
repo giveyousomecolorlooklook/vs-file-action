@@ -1,4 +1,3 @@
- 
 # VS File Action
 
 一个用于自定义文件操作的 VS Code 扩展，支持通过右键菜单和状态栏快速执行预定义的文件操作。
@@ -22,23 +21,33 @@
 
 ## 配置说明
 
-在 `actions.json` 中配置文件操作：
+
+
+#### 变量支持
+
+- `${filePath}`：当前文件完整路径
+- `${fileDir}`：当前文件所在目录
+- `${fileName}`：当前文件名
+- `${extensionPath}`：插件根目录
+
+#### 示例：自定义命令和工作目录
 
 ```json
 {
   "fileActions": [
-    {
-      "fileType": ".js",
+     {
+      "fileType": ".csv",
       "actions": [
         {
-          "name": "格式化代码",
-          "type": "vscode-command",
+          "name": "使用Excel打开",
+          "type": "shell-command",
           "config": {
-            "command": "editor.action.formatDocument"
+            "command": "start excel \"${filePath}\"",
+            "cwd": "${fileDir}"
           }
         }
       ]
-    }
+    },
   ]
 }
 ```
@@ -61,4 +70,3 @@ MIT
 
 **开始使用 VS File Action 提升您的开发效率！**
 
-        
