@@ -31,20 +31,26 @@ registry.register('vscode-command', {
 });
 
 registry.register('shell-command', {
-  async execute(uri: vscode.Uri, config: { command: string }) {
+  async execute(uri: vscode.Uri, config: { commands: string[] }) {
     const extensionPath = vscode.extensions.getExtension('chentp0601.vs-file-action')?.extensionPath || '';
     const fileName = path.basename(uri.fsPath);
-    const command = config.command
-      .replace('${filePath}', uri.fsPath)
-      .replace('${fileDir}', path.dirname(uri.fsPath))
-      .replace('${fileName}', fileName)
-      .replace('${extensionPath}', extensionPath);
+
+    // 支持多行命令
+    const commands = (config.commands || []).map(cmd =>
+      cmd
+        .replace(/\$\{filePath\}/g, uri.fsPath)
+        .replace(/\$\{fileDir\}/g, path.dirname(uri.fsPath))
+        .replace(/\$\{fileName\}/g, fileName)
+        .replace(/\$\{extensionPath\}/g, extensionPath)
+    );
 
     let terminal = vscode.window.terminals.find(t => t.name === 'shell-command');
     if (!terminal) {
       terminal = vscode.window.createTerminal('shell-command');
     }
-    terminal.sendText(command);
+    for (const cmd of commands) {
+      terminal.sendText(cmd);
+    }
     terminal.show();
   }
 });
@@ -54,10 +60,10 @@ registry.register('npm-script', {
     const extensionPath = vscode.extensions.getExtension('chentp0601.vs-file-action')?.extensionPath || '';
     const fileName = path.basename(uri.fsPath);
     const command = config.script
-      .replace('${filePath}', uri.fsPath)
-      .replace('${fileDir}', path.dirname(uri.fsPath))
-      .replace('${fileName}', fileName)
-      .replace('${extensionPath}', extensionPath);
+      .replace(/\$\{filePath\}/g, uri.fsPath)
+      .replace(/\$\{fileDir\}/g, path.dirname(uri.fsPath))
+      .replace(/\$\{fileName\}/g, fileName)
+      .replace(/\$\{extensionPath\}/g, extensionPath);
 
     let terminal = vscode.window.terminals.find(t => t.name === 'NPM Script');
     if (!terminal) {

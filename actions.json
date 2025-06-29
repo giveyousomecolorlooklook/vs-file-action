@@ -80,7 +80,10 @@
           "name": "ocr",
           "type": "shell-command",
           "config": {
-            "command": "${extensionPath}\\bin\\.venv\\Scripts\\python.exe ${extensionPath}\\bin\\ocr_cn_cli.py -i ${filePath} -o ${fileDir}\\ocr_output.txt"
+            "commands": [
+              "call \"${extensionPath}\\bin\\.venv\\Scripts\\activate\"",
+              "python \"${extensionPath}\\bin\\ocr_cn_cli.py\" -i \"${filePath}\" -o \"${fileDir}\\ocr_output.txt\""
+            ]
           }
         }
       ]
