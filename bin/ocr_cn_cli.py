@@ -23,9 +23,6 @@ def parse_args(args: Optional[List[str]] = None) -> argparse.Namespace:
     
     return parser.parse_args(args)
 
-
-
-
 def main():
     """主函数入口"""
     try:

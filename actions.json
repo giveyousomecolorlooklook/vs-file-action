@@ -72,6 +72,18 @@
           }
         }
       ]
+    },
+    {
+      "fileType": ".png",
+      "actions": [
+        {
+          "name": "ocr",
+          "type": "shell-command",
+          "config": {
+            "command": "${extensionPath}\\bin\\.venv\\Scripts\\python.exe ${extensionPath}\\bin\\ocr_cn_cli.py -i ${filePath} -o ${fileDir}\\ocr_output.txt"
+          }
+        }
+      ]
     }
   ]
 }
