@@ -35,22 +35,105 @@
 ```json
 {
   "fileActions": [
-     {
+    {
       "fileType": ".csv",
       "actions": [
         {
           "name": "使用Excel打开",
           "type": "shell-command",
           "config": {
-            "command": "start excel \"${filePath}\"",
-            "cwd": "${fileDir}"
+            "commands": [
+              "start excel \"${filePath}\""
+            ]
           }
         }
       ]
     },
+    {
+      "fileType": ".js",
+      "actions": [
+        {
+          "name": "格式化代码",
+          "type": "vscode-command",
+          "config": {
+            "command": "editor.action.formatDocument"
+          }
+        },
+        {
+          "name": "运行文件",
+          "type": "shell-command",
+          "config": {
+            "commands": [
+              "node ${filePath}"
+            ]
+          }
+        },
+        {
+          "name": "使用 Prettier 格式化",
+          "type": "npm-script",
+          "config": {
+            "commands": [
+              "prettier --write ${filePath}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fileType": ".ts",
+      "actions": [
+        {
+          "name": "编译",
+          "type": "shell-command",
+          "config": {
+            "commands": [
+              "tsc ${filePath}"
+            ]
+          }
+        },
+        {
+          "name": "运行 ts-node",
+          "type": "shell-command",
+          "config": {
+            "commands": [
+              "ts-node ${filePath}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "fileType": ".md",
+      "actions": [
+        {
+          "name": "预览",
+          "type": "vscode-command",
+          "config": {
+            "command": "markdown.showPreview"
+          }
+        }
+      ]
+    },
+    {
+      "fileType": ".png",
+      "actions": [
+        {
+          "name": "ocr",
+          "type": "shell-command",
+          "config": {
+            "commands": [
+              "cd \"${extensionPath}\\bin\"",
+              ".venv\\Scripts\\activate",
+              "python \"${extensionPath}\\bin\\ocr_cn_cli.py\" -i \"${filePath}\" -o \"${fileDir}\\ocr_output.txt\""
+            ]
+          }
+        }
+      ]
+    }
   ]
 }
 ```
+
 
 ## 系统要求
 
