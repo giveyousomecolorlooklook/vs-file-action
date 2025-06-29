@@ -4,7 +4,7 @@
   "name": "vs-file-action",
   "displayName": "vs-file-action",
   "description": "file is context",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/giveyousomecolorlooklook/vs-file-action.git"
