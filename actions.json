@@ -7,8 +7,9 @@
           "name": "使用Excel打开",
           "type": "shell-command",
           "config": {
-            "command": "start excel \"${filePath}\"",
-            "cwd": "${fileDir}"
+            "commands": [
+              "start excel \"${filePath}\""
+            ]
           }
         }
       ]
@@ -27,15 +28,18 @@
           "name": "运行文件",
           "type": "shell-command",
           "config": {
-            "command": "node ${filePath}",
-            "cwd": "${fileDir}"
+            "commands": [
+              "node ${filePath}"
+            ]
           }
         },
         {
           "name": "使用 Prettier 格式化",
           "type": "npm-script",
           "config": {
-            "script": "prettier --write ${filePath}"
+            "commands": [
+              "prettier --write ${filePath}"
+            ]
           }
         }
       ]
@@ -47,16 +51,18 @@
           "name": "编译",
           "type": "shell-command",
           "config": {
-            "command": "tsc ${filePath}",
-            "cwd": "${fileDir}"
+            "commands": [
+              "tsc ${filePath}"
+            ]
           }
         },
         {
           "name": "运行 ts-node",
           "type": "shell-command",
           "config": {
-            "command": "ts-node ${filePath}",
-            "cwd": "${fileDir}"
+            "commands": [
+              "ts-node ${filePath}"
+            ]
           }
         }
       ]
@@ -81,7 +87,8 @@
           "type": "shell-command",
           "config": {
             "commands": [
-              "call \"${extensionPath}\\bin\\.venv\\Scripts\\activate\"",
+              "cd \"F:\\repos_github\\vs-file-action\\bin \"",
+              ".venv\\Scripts\\activate",
               "python \"${extensionPath}\\bin\\ocr_cn_cli.py\" -i \"${filePath}\" -o \"${fileDir}\\ocr_output.txt\""
             ]
           }
