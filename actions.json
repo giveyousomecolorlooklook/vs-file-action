@@ -87,7 +87,7 @@
           "type": "shell-command",
           "config": {
             "commands": [
-              "cd \"F:\\repos_github\\vs-file-action\\bin \"",
+              "cd \"F:\\repos_github\\vs-file-action\\bin\"",
               ".venv\\Scripts\\activate",
               "python \"${extensionPath}\\bin\\ocr_cn_cli.py\" -i \"${filePath}\" -o \"${fileDir}\\ocr_output.txt\""
             ]
